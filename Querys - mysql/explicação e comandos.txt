@@ -1,0 +1,58 @@
+criando um banco de dados para usar querys
+
+*Criando database:
+create database cadastro;
+
+*Criando tabelas e preparando elas para receber as informações corretas:
+-cliente
+create table cliente(idcliente int primary key auto_increment, nome varchar(30) not null, email varchar(30) unique, sexo enum('M','F') not null);
+
+-endereco (foi usado unique para permitir que um único cliente tenha mais de um endereço)
+create table endereco(idendereco int primary key auto_increment, rua varchar(30) not null, bairro varchar(30) not null, cidade varchar(30) not null, id_cliente int, foreign key(id_cliente) references cliente(idcliente));
+
+-telefone
+create table telefone(idtelefone int primary key auto_increment, tipo enum('cel','res','com') not null, numero char(10), id_cliente int, foreign key(id_cliente) references cliente(idcliente));
+
+*Inserindo informações nas tabelas:
+-cliente
+insert into cliente values(null,'barbara','baby@gmail.com','F');
+insert into cliente values(null,'andressa','andressa@gmail.com','F');
+insert into cliente values(null,'saulo','saulo@gmail.com','M');
+insert into cliente values(null,'lucas','lucas@gmail.com','M');
+insert into cliente values(null,'pedro','pedro@gmail.com','M');
+-endereco
+insert into endereco values(null,"rua a","caju","rj",1);
+insert into endereco values(null,"rua b","penha","rj",2);
+insert into endereco values(null,"rua c","caju","rj",3);
+insert into endereco values(null,"rua d","bras de pina","rj",4);
+insert into endereco values(null,"rua e","caju","rj",5);
+-telefone
+insert into endereco values(null,"rua a","caju","rj",1);
+insert into endereco values(null,"rua b","penha","rj",2);
+insert into endereco values(null,"rua c","caju","rj",3);
+insert into endereco values(null,"rua d","bras de pina","rj",4);
+insert into endereco values(null,"rua e","caju","rj",5);
+
+*Confirmando a estrutura:
+Podemos confirmar a estrutura das tabelas usando desc cliente/desc telefone/desc endereco.
+
+*Comandos querys:
+Realizando a projeção das colunas com as informações desejadas.
+- selecionando os nomes, sexo e email dos cliente para visualização:
+select nome,sexo,email from cliente;
+
+- selecionando somente os nomes, sexo e email das clientes femininas:
+select nome,sexo,email from cliente where sexo = "F";
+
+- selecionando os nome, sexo, email e endereço de todos os clientes:
+select nome,sexo,bairro from cliente inner join endereco where idcliente = id_cliente;
+
+- selecionando todas as informações das 3 tabelas:
+select c.nome,c.email,t.tipo,t.numero,e.bairro,e.cidade from cliente c inner join telefone t on c.idcliente = t.id_cliente inner join endereco e on c.idcliente = e.id_cliente;
+
+- criando visão(view) com a regra de exibir somente clientes do RJ e deixar a tabela salva:
+create view v_informação as
+select c.nome,c.email,t.numero from cliente c inner join telefone t on c.idcliente = t.id_cliente inner join endereco e on c.idcliente = e.id_cliente where cidade = "rj";
+
+
+                                                                      
