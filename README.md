@@ -3,7 +3,8 @@
 Olá Jogadores! 
 ``
 ## Introdução
-Criando uma base de dados, tabelas e inserindo os comandos para apresentar tabelas com regras especificas/ou não 
+Criando uma base de dados, tabelas e inserindo os comandos para apresentar tabelas com regras especificas/ou não.
+
 ![1](https://github.com/playerLuiz/querys_mysql/assets/119456281/79df4e18-eb5d-4dfa-8537-a138e92c1e72)
 
 ![2](https://github.com/playerLuiz/querys_mysql/assets/119456281/f3afcc8e-c53a-4548-ad30-1232355021e1)
